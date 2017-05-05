@@ -1,0 +1,4 @@
+SConstruct
+*.exe
+build/*
+*.dblite
