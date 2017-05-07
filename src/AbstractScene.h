@@ -14,6 +14,8 @@ public:
     virtual ~AbstractScene();
 
     virtual void setPosition(int xVal, int yVal);
+    
+    virtual void updateLayout();
 
     virtual void render(sf::RenderWindow& window) = 0;
 

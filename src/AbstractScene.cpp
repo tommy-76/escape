@@ -17,6 +17,11 @@ void AbstractScene::setPosition(int xVal, int yVal)
     yMax = y + height;
 }
 
+void AbstractScene::updateLayout()
+{
+    // nothing to do in abstract class
+}
+
 void AbstractScene::protectItemPosition(sf::Vector2f& pos, int xMargin, int yMargin)
 {
     int xMinMod = xMin + xMargin;

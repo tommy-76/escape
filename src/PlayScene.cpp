@@ -19,13 +19,17 @@ PlayScene::~PlayScene()
 
 void PlayScene::update(Registry* reg)
 {
-    background.setPosition(x, y);
     if (!reg->playerCollision) {
         updatePlayer(reg);
         updateEnemies(reg);
         protectPlayerPosition();
         protectEnemiesPositions();
     }
+}
+
+void PlayScene::updateLayout()
+{
+    background.setPosition(x, y);
 }
 
 void PlayScene::render(sf::RenderWindow& window)

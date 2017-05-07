@@ -98,6 +98,7 @@ void Game::initPlayScene()
 {
     playScene.reset(new PlayScene(790, 520));
     playScene->setPosition(5, 75);
+    playScene->updateLayout();
     reg->log->info("Play scene init");
 }
 

@@ -21,6 +21,8 @@ public:
     virtual void render(sf::RenderWindow& window);
 
     virtual void update(Registry* reg);
+    
+    virtual void updateLayout();
 
     void setPlayer(Player* playerPtr);
 

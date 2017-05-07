@@ -24,7 +24,7 @@ class FailScene : public AbstractScene
         
         void centerOrigin();
         
-        void updateLayout();
+        virtual void updateLayout();
 
     private:
         sf::RectangleShape background;
