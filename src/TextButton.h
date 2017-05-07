@@ -19,12 +19,16 @@ class TextButton
         
         void setTextColor(const sf::Color& color);
         
+        void setTextHoverColor(const sf::Color& color);
+        
         void update(Registry* reg);
         
         void render(sf::RenderWindow& window);
     
     private:
         sf::Text txt;
+        const sf::Color* txtColor;
+        const sf::Color* hoverTxtColor;
 };
 
 #endif

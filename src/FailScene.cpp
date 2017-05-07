@@ -30,6 +30,8 @@ void FailScene::centerOrigin()
 
 void FailScene::update(Registry* reg)
 {
+    restartBtn->update(reg);
+    menuBtn->update(reg);
 }
 
 void FailScene::updateLayout()
@@ -68,8 +70,10 @@ void FailScene::initButtons()
     restartBtn.reset(new TextButton("RESTART"));
     restartBtn->setTextSize(30);
     restartBtn->setTextColor(sf::Color::Red);
+    restartBtn->setTextHoverColor(sf::Color::Yellow);
     
     menuBtn.reset(new TextButton("MENU"));
     menuBtn->setTextSize(30);
     menuBtn->setTextColor(sf::Color::Red);
+    menuBtn->setTextHoverColor(sf::Color::Yellow);
 }
