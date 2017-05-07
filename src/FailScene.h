@@ -6,6 +6,8 @@
 #include <SFML/Graphics.hpp>
 #include <memory>
 
+class TextButton;
+
 class FailScene : public AbstractScene
 {
     public:
@@ -21,12 +23,14 @@ class FailScene : public AbstractScene
         void setButtonFont(const sf::Font& font);
         
         void centerOrigin();
+        
+        void updateLayout();
 
     private:
         sf::RectangleShape background;
         sf::Text message;
-        sf::Text restart;
-        sf::Text menu;
+        std::unique_ptr<TextButton> restartBtn;
+        std::unique_ptr<TextButton> menuBtn;
         
         void initMessage();
         void initButtons();

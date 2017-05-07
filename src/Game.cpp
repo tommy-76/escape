@@ -106,7 +106,8 @@ void Game::initFailScene()
     failScene.reset(new FailScene(300, 250));
     failScene->setFont(reg->asset->getFont("main"));
     failScene->setButtonFont(reg->asset->getFont("button"));
-    failScene->centerOrigin();
     failScene->setPosition(reg->screenWidth/2, reg->screenHeight/2);
+    failScene->centerOrigin();
+    failScene->updateLayout();
     reg->log->info("Fail scene init");
 }

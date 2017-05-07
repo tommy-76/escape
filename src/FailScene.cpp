@@ -1,4 +1,5 @@
 #include "FailScene.h"
+#include "TextButton.h"
 
 FailScene::FailScene(int widthVal, int heightVal)
     : AbstractScene(widthVal, heightVal)
@@ -18,7 +19,8 @@ void FailScene::render(sf::RenderWindow& window)
 {
     window.draw(background);
     window.draw(message);
-    window.draw(restart);
+    restartBtn->render(window);
+    menuBtn->render(window);
 }
 
 void FailScene::centerOrigin()
@@ -28,9 +30,17 @@ void FailScene::centerOrigin()
 
 void FailScene::update(Registry* reg)
 {
+}
+
+void FailScene::updateLayout()
+{
     background.setPosition(x, y);
     message.setPosition(x, y - 30);
-    restart.setPosition(x, (y + (height/2) - 60));
+    float leftX = x - (width/2);
+    float bottomY = y + (height/2);
+    float rightX = x + (width/2);
+    restartBtn->setPosition((leftX + 15), (bottomY - 50));
+    menuBtn->setPosition((rightX - 80), (bottomY - 50));
 }
 
 void FailScene::setFont(const sf::Font& font)
@@ -42,10 +52,8 @@ void FailScene::setFont(const sf::Font& font)
 
 void FailScene::setButtonFont(const sf::Font& font)
 {
-    restart.setFont(font);
-    menu.setFont(font);
-    sf::FloatRect boundRst = restart.getLocalBounds();
-    restart.setOrigin(boundRst.width/2, boundRst.height/2);
+    restartBtn->setFont(font);
+    menuBtn->setFont(font);
 }
 
 void FailScene::initMessage()
@@ -57,11 +65,11 @@ void FailScene::initMessage()
 
 void FailScene::initButtons()
 {
-    restart.setString("RESTART");
-    restart.setCharacterSize(40);
-    restart.setColor(sf::Color::Red);
+    restartBtn.reset(new TextButton("RESTART"));
+    restartBtn->setTextSize(30);
+    restartBtn->setTextColor(sf::Color::Red);
     
-    menu.setString("MENU");
-    menu.setCharacterSize(40);
-    menu.setColor(sf::Color::Red);
+    menuBtn.reset(new TextButton("MENU"));
+    menuBtn->setTextSize(30);
+    menuBtn->setTextColor(sf::Color::Red);
 }
