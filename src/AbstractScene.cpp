@@ -1,7 +1,8 @@
 #include "AbstractScene.h"
+#include "Registry.h"
 
-AbstractScene::AbstractScene(int widthVal, int heightVal)
-    : width(widthVal), height(heightVal)
+AbstractScene::AbstractScene(int widthVal, int heightVal, Registry* registry)
+    : width(widthVal), height(heightVal), reg(registry)
 {}
 
 AbstractScene::~AbstractScene()

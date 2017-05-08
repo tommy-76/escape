@@ -4,6 +4,7 @@
 #include "Asset.h"
 #include "PlayScene.h"
 #include "FailScene.h"
+#include "HudScene.h"
 #include "Enemy.h"
 #include "Randomizer.h"
 
@@ -20,6 +21,7 @@ void Game::initialize()
     initPlayer();
     initEnemies();
     initFailScene();
+    initHudScene();
     initPlayScene();
     playScene->setPlayer(&player);
     playScene->setEnemies(&enemyList);
@@ -46,6 +48,7 @@ void Game::render(sf::RenderWindow& window)
         case Game::State::MENU:
             break;
         case Game::State::PLAY:
+            hudScene->render(window);
             playScene->render(window);
             if (reg->playerCollision) {
                 failScene->render(window);
@@ -60,10 +63,11 @@ void Game::render(sf::RenderWindow& window)
 
 void Game::playUpdate()
 {
-    playScene->update(reg);
+    playScene->update();
     if (reg->playerCollision) {
-        failScene->update(reg);
+        failScene->update();
     }
+    hudScene->update();
 }
 
 void Game::onClose()
@@ -96,7 +100,7 @@ void Game::initEnemies()
 
 void Game::initPlayScene()
 {
-    playScene.reset(new PlayScene(790, 520));
+    playScene.reset(new PlayScene(790, 520, reg));
     playScene->setPosition(5, 75);
     playScene->updateLayout();
     reg->log->info("Play scene init");
@@ -104,11 +108,19 @@ void Game::initPlayScene()
 
 void Game::initFailScene()
 {
-    failScene.reset(new FailScene(300, 250));
+    failScene.reset(new FailScene(300, 250, reg));
     failScene->setFont(reg->asset->getFont("main"));
     failScene->setButtonFont(reg->asset->getFont("button"));
     failScene->setPosition(reg->screenWidth/2, reg->screenHeight/2);
     failScene->centerOrigin();
     failScene->updateLayout();
     reg->log->info("Fail scene init");
+}
+
+void Game::initHudScene()
+{
+    hudScene.reset(new HudScene(reg->screenWidth - 2, 70, reg));
+    hudScene->setPosition(1, 1);
+    hudScene->updateLayout();
+    reg->log->info("Hud scene init");
 }

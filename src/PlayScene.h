@@ -15,12 +15,12 @@ using EnemyListPtr = std::vector<std::shared_ptr<Enemy>>*;
 class PlayScene : public AbstractScene
 {
 public:
-    explicit PlayScene(int widthVal, int heightVal);
+    explicit PlayScene(int widthVal, int heightVal, Registry* registry);
     virtual ~PlayScene();
 
     virtual void render(sf::RenderWindow& window);
 
-    virtual void update(Registry* reg);
+    virtual void update();
     
     virtual void updateLayout();
 
@@ -33,15 +33,15 @@ private:
     Player* player = nullptr;
     EnemyListPtr enemyList;
 
-    void updatePlayer(Registry* reg);
+    void updatePlayer();
 
-    void updateEnemies(Registry* reg);
+    void updateEnemies();
 
     void protectEnemiesPositions();
     
     void protectPlayerPosition();
     
-    void playerCollisionDetection(Registry* reg);
+    void playerCollisionDetection();
 
     void renderEnemies(sf::RenderWindow& window);
 };

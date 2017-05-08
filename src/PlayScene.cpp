@@ -5,23 +5,21 @@
 #include "Enemy.h"
 #include "Logger.h"
 
-PlayScene::PlayScene(int widthVal, int heightVal)
-    : AbstractScene(widthVal, heightVal)
+PlayScene::PlayScene(int widthVal, int heightVal, Registry* registry)
+    : AbstractScene(widthVal, heightVal, registry)
 {
     background.setSize(sf::Vector2f(width, height));
     background.setFillColor(sf::Color::Black);
-    background.setOutlineThickness(1);
-    background.setOutlineColor(sf::Color::Yellow);
 }
 
 PlayScene::~PlayScene()
 {}
 
-void PlayScene::update(Registry* reg)
+void PlayScene::update()
 {
     if (!reg->playerCollision) {
-        updatePlayer(reg);
-        updateEnemies(reg);
+        updatePlayer();
+        updateEnemies();
         protectPlayerPosition();
         protectEnemiesPositions();
     }
@@ -49,7 +47,7 @@ void PlayScene::setEnemies(EnemyListPtr enemies)
     enemyList = enemies;
 }
 
-void PlayScene::updatePlayer(Registry* reg)
+void PlayScene::updatePlayer()
 {
     if (!reg->inputDevice->isLeftMousePressed()) {
         return;
@@ -64,10 +62,10 @@ void PlayScene::updatePlayer(Registry* reg)
     playerPos.y += yDiff;
 }
 
-void PlayScene::updateEnemies(Registry* reg)
+void PlayScene::updateEnemies()
 {
     protectEnemiesPositions();
-    playerCollisionDetection(reg);
+    playerCollisionDetection();
 }
 
 void PlayScene::renderEnemies(sf::RenderWindow& window)
@@ -93,7 +91,7 @@ void PlayScene::protectPlayerPosition()
     player->updateView();
 }
 
-void PlayScene::playerCollisionDetection(Registry* reg)
+void PlayScene::playerCollisionDetection()
 {
     sf::Vector2f& playerPos = player->getPosition();
     for (auto enemyPtr : *enemyList) {

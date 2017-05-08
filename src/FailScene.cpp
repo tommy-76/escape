@@ -1,8 +1,8 @@
 #include "FailScene.h"
 #include "TextButton.h"
 
-FailScene::FailScene(int widthVal, int heightVal)
-    : AbstractScene(widthVal, heightVal)
+FailScene::FailScene(int widthVal, int heightVal, Registry* registry)
+    : AbstractScene(widthVal, heightVal, registry)
 {
     background.setSize(sf::Vector2f(width, height));
     background.setFillColor(sf::Color::Black);
@@ -28,7 +28,7 @@ void FailScene::centerOrigin()
     background.setOrigin(width/2, height/2);
 }
 
-void FailScene::update(Registry* reg)
+void FailScene::update()
 {
     restartBtn->update(reg);
     menuBtn->update(reg);

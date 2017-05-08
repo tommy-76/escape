@@ -11,12 +11,12 @@ class TextButton;
 class FailScene : public AbstractScene
 {
     public:
-        explicit FailScene(int widthVal, int heightVal);
+        explicit FailScene(int widthVal, int heightVal, Registry* registry);
         virtual ~FailScene();
         
         virtual void render(sf::RenderWindow& window);
         
-        virtual void update(Registry* reg);
+        virtual void update();
         
         void setFont(const sf::Font& font);
         

@@ -10,6 +10,7 @@
 class Registry;
 class PlayScene;
 class FailScene;
+class HudScene;
 class Enemy;
 
 using EnemyPtrList = std::vector<std::shared_ptr<Enemy>>;
@@ -39,12 +40,14 @@ class Game
 
         std::unique_ptr<PlayScene> playScene;
         std::unique_ptr<FailScene> failScene;
+        std::unique_ptr<HudScene> hudScene;
         EnemyPtrList enemyList;
         
         void initPlayer();
         void initEnemies();
         void initPlayScene();
         void initFailScene();
+        void initHudScene();
         
         void playUpdate();
 };
